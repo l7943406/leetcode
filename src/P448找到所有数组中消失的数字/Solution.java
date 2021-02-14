@@ -1,11 +1,12 @@
 package P448找到所有数组中消失的数字;
 
-import java.util.ArrayList;
+
+import java.util.LinkedList;
 import java.util.List;
 
 class Solution {
     public List<Integer> findDisappearedNumbers(int[] nums){
-        List<Integer> ans = new ArrayList<>();
+        List<Integer> ans = new LinkedList<>();
         boolean[] book = new boolean[nums.length + 1];
         for(int i : nums){
             book[i] = true;

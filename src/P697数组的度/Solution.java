@@ -8,18 +8,22 @@ class Solution {
         int max = 0;
         int min = 50001;
         for (int i = 0; i < nums.length; i++) {
-            if(book[nums[i]] == 0){
-                start[nums[i]] = i;
-                end[nums[i]] = i;
-            }else{
-                end[nums[i]] = i;
+            int t = nums[i];
+            if(book[t] == 0){
+                start[t] = i;
             }
-            book[nums[i]] ++;
-            max = Math.max(book[nums[i]],max);
+            end[t] = i;
+            book[t] ++;
+            if(book[t] > max){
+                max = book[t];
+            }
         }
-        for (int i = 0; i < 50000; i++) {
+        for (int i = 0; i < book.length; i++) {
             if(book[i] == max){
-                min = Math.min(min,end[i] - start[i] + 1);
+                int t = end[i] - start[i] + 1;
+                if(t < min){
+                    min = t;
+                }
             }
         }
 

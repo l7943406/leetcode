@@ -6,6 +6,26 @@ import java.util.Stack;
 
 class Solution {
     public int calculate(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == '-' || s.charAt(i) == '+'){
+                boolean haveNum = false;
+                for (int j = i - 1; j >= 0; j--) {
+                    if(s.charAt(j) == ' '){
+                        continue;
+                    }else if(s.charAt(j) <= '9'&&s.charAt(j)>='0' || s.charAt(j) == ')'){
+                        haveNum = true;
+                        break;
+                    }else{
+                        haveNum = false;
+                        break;
+                    }
+                }
+                if(!haveNum){
+                    s = s.substring(0,i)+"0"+s.substring(i);
+                    i++;
+                }
+            }
+        }
         Stack<Character> stack1 = new Stack<>();
         Queue<Object> queue = new LinkedList<>();
         for (int i = s.length() - 1; i >= 0; i--) {
@@ -25,12 +45,12 @@ class Solution {
             }else if(c == '/'){
                 stack1.push('/');
             }else if(c=='('){
-                stack1.push('(');
-            }else if(c==')'){
                 while(stack1.peek()!=')'){
                     queue.add(stack1.pop());
                 }
                 stack1.pop();
+            }else if(c==')'){
+                stack1.push(')');
             }else if(c != ' '){
                 int num = 0;
                 int first = 0;

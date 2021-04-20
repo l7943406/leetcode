@@ -1,7 +1,6 @@
 package P114二叉树展开为链表;
 
 
-import sun.reflect.generics.tree.Tree;
 
 import java.util.ArrayList;
 import java.util.Iterator;

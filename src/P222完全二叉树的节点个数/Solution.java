@@ -1,7 +1,5 @@
 package P222完全二叉树的节点个数;
 
-import sun.reflect.generics.tree.Tree;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;

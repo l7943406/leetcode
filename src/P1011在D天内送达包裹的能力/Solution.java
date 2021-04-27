@@ -14,8 +14,14 @@ class Solution {
             sum += weight;
             max = Math.max(max,weight);
         }
-        int l = max;
-        int r = sum;
+        int l = Math.max(max,sum/D);
+        int cut;
+        if(weights.length % D == 0){
+            cut = weights.length / D;
+        }else{
+            cut = weights.length / D + 1;
+        }
+        int r = Math.min(max * cut, sum);
         while (l <= r){
             int mid = (l + r) / 2;
             if(can(mid)){

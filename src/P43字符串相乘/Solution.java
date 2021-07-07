@@ -2,7 +2,7 @@ package P43字符串相乘;
 
 import java.util.Arrays;
 
-class Solution {
+class Solution2 {
     byte[] ans = new byte[0];
     public String multiply(String num1, String num2) {
         if(num1 == null || num1.length() == 0 || num2 == null || num2.length() == 0 || "0".equals(num1) || "0".equals(num2)){

@@ -1,9 +1,11 @@
 package P1226哲学家进餐;
 
+
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
+/*
 class DiningPhilosophers {
     private int now;
     private Lock lock;
@@ -159,5 +161,27 @@ class DiningPhilosophers {
         }finally {
             lock.unlock();
         }
+    }
+}*/
+class DiningPhilosophers {
+    AtomicInteger lock ;
+    public DiningPhilosophers() {
+        lock = new AtomicInteger(1);
+    }
+
+    // call the run() method of any runnable to execute its code
+    public void wantsToEat(int philosopher,
+                           Runnable pickLeftFork,
+                           Runnable pickRightFork,
+                           Runnable eat,
+                           Runnable putLeftFork,
+                           Runnable putRightFork) throws InterruptedException {
+        while (!lock.compareAndSet(1,0));
+        pickLeftFork.run();
+        pickRightFork.run();
+        eat.run();
+        putLeftFork.run();
+        putRightFork.run();
+        lock.compareAndSet(0,1);
     }
 }

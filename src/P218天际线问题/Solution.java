@@ -7,17 +7,19 @@ class Solution {
     public List<List<Integer>> getSkyline(int[][] buildings) {
         List<List<Integer>> ans = new LinkedList<>();
         PriorityQueue<int[]> heightQueue = new PriorityQueue<>((a, b) -> b[2] - a[2]);
-        PriorityQueue<Pair> lineQueue = new PriorityQueue<>(Comparator.comparingInt(Pair::get));
+        ArrayList<Pair> lineQueue = new ArrayList<>();
         for (int[] build : buildings) {
             lineQueue.add(new Pair(false, build));
             lineQueue.add(new Pair(true, build));
         }
+        lineQueue.sort(Comparator.comparingInt(Pair::get));
+        int index = 0;
         int max = 0;
         heightQueue.add(new int[]{0, 0, 0});
-        while (!lineQueue.isEmpty()) {
-            Pair now = lineQueue.poll();
-            while (!lineQueue.isEmpty() && lineQueue.peek().get() == now.get()){
-                Pair and = lineQueue.poll();
+        while (index < lineQueue.size()) {
+            Pair now = lineQueue.get(index ++);
+            while (index < lineQueue.size() && lineQueue.get(index).get() == now.get()){
+                Pair and = lineQueue.get(index ++);
                 if (and.isEnd) {
                     heightQueue.remove(and.build);
                 } else {

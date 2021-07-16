@@ -1,6 +1,7 @@
 package LCP01猜数字;
 
 public class Solution {
+    static int p =  1;
     public int game(int[] guess, int[] answer) {
 
         //hanhan操作

@@ -60,7 +60,8 @@ class Solution {
     public void find(TreeNode root,int k){
         if(root == null){
             return;
-        }else if(k == 0){
+        }
+        if(k == 0){
             ans.add(root.val);
             return;
         }

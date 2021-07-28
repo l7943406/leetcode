@@ -4,9 +4,7 @@ class Solution {
     public int[] prisonAfterNDays(int[] cells, int n) {
         int[] map1 = new int[cells.length];
         int[] map2 = new int[cells.length];
-        for (int i = 0; i < ; i++) {
-
-        }
+        return null;
     }
 }
 /*

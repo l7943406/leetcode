@@ -3,56 +3,49 @@ package P802找到最终的安全状态;
 import java.util.*;
 
 class Solution {
+    int[][] graph;
+    /**
+    * 0 未访问
+    * 1 以访问
+    * 2 安全
+    * 3 环
+    * */
+    int[] flag;
     public List<Integer> eventualSafeNodes(int[][] graph) {
-
-        List<Integer> ends = new LinkedList<>();
-        Map<Integer,Object> book = new HashMap<>();
-        Map<Integer,List<Integer>> map = new HashMap<>();
+        this.graph = graph;
+        this.flag = new int[graph.length];
         for (int i = 0; i < graph.length; i++) {
-            if(graph[i].length == 0){
-                ends.add(i);
-                book.put(i,null);
-            }else{
-                for (int j = 0; j < graph[i].length; j++) {
-                    map.putIfAbsent(graph[i][j],new LinkedList<>());
-                    map.get(graph[i][j]).add(i);
-                }
+            if(flag[i] == 0){
+                flag[i] = 1;
+                dfs(i);
             }
         }
-
-
-        int last = 0;
-        List<Integer> removeList = new LinkedList<>();
-        while (last != ends.size()){
-            last = ends.size();
-            List<Integer> newL = new LinkedList<>();
-            for(Integer end : ends){
-                if(map.containsKey(end)){
-                    for(Integer next : map.get(end)){
-                        if(!book.containsKey(next)){
-                            book.put(next,null);
-                            newL.add(next);
-                        }else{
-                            removeList.add(next);
-                        }
-                    }
-                }
+        List<Integer> ans = new LinkedList<>();
+        for (int i = 0; i < graph.length; i++) {
+            if(flag[i] == 2){
+                ans.add(i);
             }
-            ends.addAll(newL);
         }
-        ends.removeAll(removeList);
-
-
-
-
-
-
-
-
-
-
-        ends.sort(Comparator.comparingInt(a -> a));
-        return ends;
+        return ans;
+    }
+    private void dfs(int step){
+        if(graph[step].length == 0){
+            flag[step] = 2;
+            return;
+        }
+        for (int next : graph[step]) {
+            if(flag[next] == 0){
+                flag[next] = 1;
+                dfs(next);
+            }
+            if(flag[next] == 3 || flag[next] == 1){
+                flag[step] = 3;
+                return;
+            }
+        }
+        if(flag[step] != 3){
+            flag[step] = 2;
+        }
     }
 }
 /*

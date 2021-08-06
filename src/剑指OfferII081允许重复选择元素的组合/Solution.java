@@ -1,31 +1,42 @@
 package 剑指OfferII081允许重复选择元素的组合;
 
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
+@SuppressWarnings("all")
+
 
 class Solution {
+    int[] candidates;
+    int target;
+    List<List<Integer>> ans;
+    int[] stack;
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        int min = 201;
-        for(int candidate : candidates){
-            if(candidate < min){
-                min = candidate;
+        Arrays.sort(candidates);
+        this.candidates = candidates;
+        this.target = target;
+        this.stack = new int[target / candidates[0] + 1];
+        this.ans = new LinkedList<>();
+        dfs(0,0,0);
+        return ans;
+    }
+    private void dfs(int step,int sum,int index){
+        if(sum >= target){
+            if(sum == target){
+                List<Integer> list = new LinkedList<>();
+                for(int i = 0; i < step; i++){
+                    list.add(stack[i]);
+                }
+                ans.add(list);
             }
-        }
-        int[][] dp = new int[(target + min - 1) / min + 1][target - min];
-        int n = (target + min - 1) / min + 1;
-        for(int i : candidates){
-            if(i <= target) {
-                dp[0][i - min]++;
-            }
-        }
-        for (int i = 0; i < n - 1; i++) {
-
+            return;
         }
 
-
-return null;
-
-
-
+        for (int i = index; i < candidates.length; i++) {
+            stack[step] = candidates[i];
+            dfs(step + 1, sum + candidates[i],i);
+        }
     }
 }
 

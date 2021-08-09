@@ -7,19 +7,23 @@ class Solution {
         for (int i = 0; i < nums.length ; i++) {
             if(nums[i] > -1001 && nums[i] < 1001){
                 if(nums[i] < 0){
-                    int id = min - 1;
+                    int id = --min;
                     int index = i;
-                    while (nums[index] < 0 && nums[index] > -1001){
-                        index = (index + nums[index] + nums.length) % nums.length;
+                    while (nums[index] < 0 && nums[index] > -1001 && (index + nums[index] + 1000 * nums.length) % nums.length != index){
+                        int t = nums[index];
+                        nums[index] = id;
+                        index = (index + t + 1000 * nums.length) % nums.length;
                     }
                     if(nums[index] == id){
                         return true;
                     }
                 }else{
-                    int id = max + 1;
+                    int id = ++max;
                     int index = i;
-                    while (nums[index] > 0 && nums[index] < 1001){
-                        index = (index + nums[index]) % nums.length;
+                    while (nums[index] > 0 && nums[index] < 1001 && (index + nums[index]) % nums.length != index){
+                        int t = nums[index];
+                        nums[index] = id;
+                        index = (index + t) % nums.length;
                     }
                     if(nums[index] == id){
                         return true;
@@ -30,6 +34,7 @@ class Solution {
         return false;
 
     }
+
 }
 /*
 

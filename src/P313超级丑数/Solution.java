@@ -1,18 +1,23 @@
 package P313超级丑数;
 
+import java.util.PriorityQueue;
+
 class Solution {
     public int nthSuperUglyNumber(int n, int[] primes) {
-        for (int i = 0; i < primes.length; i++) {
-            for (int j = i + 1; j < primes.length; j++) {
-                System.out.print(" " + primes[j] * primes[i]);
+        PriorityQueue<Long> queue = new PriorityQueue<>();
+        long res = 1;
+        for (int i = 1; i < n; i++) {
+            for(int prime : primes){
+                queue.add(prime * res);
+            }
+            res = queue.poll();
+            while (!queue.isEmpty() && res == queue.peek()){
+                queue.poll();
             }
         }
-        return 0;
+        return (int) res;
     }
 
-    public static void main(String[] args) {
-        new Solution().nthSuperUglyNumber(0,new int[]{2,3,5});
-    }
 }
 /*
 

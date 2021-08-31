@@ -10,8 +10,7 @@ class TreeNode {
         val = x;
     }
 }
-
-public class Codec {
+class Codec {
     private StringBuilder s;
     public String serialize(TreeNode root) {
         s = new StringBuilder();

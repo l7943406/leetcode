@@ -1,11 +1,19 @@
 package 剑指OfferII085生成匹配的括号;
 
+import java.util.LinkedList;
 import java.util.List;
 
 class Solution {
+    List<String> ans = new LinkedList<>();
     public List<String> generateParenthesis(int n) {
-        return null;
+
+
+
+
+
+        return ans;
     }
+    
 }
 /*
 

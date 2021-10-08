@@ -1,12 +1,28 @@
 package 剑指OfferII038每日温度;
 
-import java.util.PriorityQueue;
+import java.util.Deque;
+import java.util.LinkedList;
 
 class Solution {
     public int[] dailyTemperatures(int[] temperatures) {
-        PriorityQueue<Integer> queue = new PriorityQueue<>();
-        return null;
+        Deque<int[]> queue = new LinkedList<>();
+        int[] ans = new int[temperatures.length];
+        queue.addLast(new int[]{temperatures[0], 0});
+        for (int i = 1; i < temperatures.length; i++) {
+            while (!queue.isEmpty() && queue.peekLast()[0] < temperatures[i]){
+                int[] min = queue.pollLast();
+                ans[min[1]] = i - min[1];
+            }
+            queue.addLast(new int[]{temperatures[i], i});
+        }
+        for(int[] ids : queue){
+            ans[ids[1]] = 0;
+        }
+
+        return ans;
     }
+
+
 }
 /*
 
